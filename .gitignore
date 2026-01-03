@@ -1,0 +1,13 @@
+# Python 垃圾文件
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# 你的环境配置（如果有）
+.env
+venv/
+
+# 巨大的数据文件（不要传！）
+*.csv
+*.dta
+*.mat
