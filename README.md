@@ -1,7 +1,7 @@
 # Replication of Eaton, Kortum, and Kramarz (2021)
 
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jruedai08/Eaton-Eslava-Jinkins-Krizan-Tybout-2021-Replication/blob/main/Dashboard.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jruedai08/Eaton-Eslava-Jinkins-Krizan-Tybout-2021-Replication/blob/main/console.ipynb)
 This repository contains a **Python implementation** of the dynamic search and learning model from the paper:
 > **"A search and learning model of export dynamics"** > *Jonathan Eaton, Marcela Eslava, David Jinkins, C.J. Krizan, James Tybout (2021)*
 
@@ -116,7 +116,7 @@ Then:
 
 > **Experience the model dynamics yourself!**
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jruedai08/Eaton-Eslava-Jinkins-Krizan-Tybout-2021-Replication/blob/main/Dashboard.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jruedai08/Eaton-Eslava-Jinkins-Krizan-Tybout-2021-Replication/blob/main/console.ipynb)
 
 <p align="center">
   <img src="figs/figure_value_function.png" width="30%" />
