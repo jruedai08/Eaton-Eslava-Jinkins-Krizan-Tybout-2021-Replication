@@ -59,9 +59,8 @@ $$
 * Given the state $\{a,n,x,\varphi\}$, the return to search includes (1) switch to other macro statement. (2) encounters a buyer and results in a transaction. (3) encounters a buyer but fails to result in a transaction.
 
 $$
-V_{\varphi}(a, n, x) = \max_{s} \frac{1}{\rho + s + \lambda_x^X} [ 
--c(s, a) + \sum_{x' \neq x} q_{xx'}^X V_{\varphi}(a, n, x') 
-+ s \{ \bar{\theta}_{a,n} [\tilde{\pi}_{\varphi}(x) + V_{\varphi}(a+1, n+1, x)] + (1 - \bar{\theta}_{a,n})V_{\varphi}(a, n+1, x) \} ]
+V_\varphi(a, n, x) = \max_{s} \frac{1}{\rho + s + \lambda_x^X} [ 
+-c(s, a) + \sum_{x' \neq x} q_{xx'}^X V_\varphi(a, n, x')+s \{ \bar{\theta}_{a,n} [\tilde{\pi}_{\varphi}(x) + V_{\varphi}(a+1, n+1, x)] + (1 - \bar{\theta}_{a,n})V_{\varphi}(a, n+1, x) \}]
 $$
 
 Where:
