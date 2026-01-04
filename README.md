@@ -84,30 +84,19 @@ $$
 \frac{\partial c(s^*,a)}{\partial s}=\overline{\theta}_{a,n}[\tilde{\pi}_\varphi(x)+V_\varphi(a+1,n+1,x)]+(1-\overline{\theta}_{a,n})V_\varphi(a,n+1,x)-V_\varphi(a,n,x)
 $$
 
-* Given optimal searching intensity $s^*$, I rewrite the HJB equation into a linear system $\mathbf{A}\mathbf{V}=\mathbf{B}$, where $N$ is the number of grid points.
+* Given optimal searching intensity $s^*$, I rewrite the HJB equation into a linear system $\mathbf{A}\mathbf{X}=\mathbf{B}$, where $N$ is the number of grid points.
 
 * **Matrix $\mathbf{A}$ ($N \times N$)**: The sparse transition matrix.
-$$
-\mathbf{A} = 
-\begin{array}{cc}
-\rho+s^*+\lambda_x^X & -\lambda_x^X & 0 & \cdots & 0 \\
--\frac{1}{2}(1-\frac{N-1}{N})\lambda_x^X & \rho+s^*+\lambda_x^X & -\frac{1}{2}(1+\frac{N-1}{N})\lambda_x^X & \cdots & 0 \\
-0 & -\frac{1}{2}(1-\frac{N-2}{N})\lambda_x^X & \rho+s^*+\lambda_x^X & \cdots & 0 \\
-\vdots & \vdots & \vdots & \ddots & \vdots \\
-0 & 0 & 0 & \cdots & \rho+s^*+\lambda_x^X
-\end{array}
-$$
 
-* **Vector $\mathbf{V}$ ($N \times 1$)**: The value function we solve for.
-$$
-\mathbf{V} = 
-\begin{array}{cc}
-V_\varphi(a,n,x^1) \\
-V_\varphi(a,n,x^2) \\
-\vdots \\
-V_\varphi(a,n,x^N)
-\end{array}
-$$
+<p align="center">
+  <img src="figs/matrix_A.png" width="80%" />
+</p>
+
+* **Vector $\mathbf{X}$ ($N \times 1$)**: The value function we solve for.
+
+<p align="center">
+  <img src="figs/matrix_X.png" width="80%" />
+</p>
 
 * **Vector $\mathbf{B}$ ($N \times 1$)**: The flow payoff and option value vector.
 Let the RHS term for state $x^i$ be:
@@ -117,15 +106,10 @@ u_i = s^* \{\overline{\theta}_{a,n}[\tilde{\pi}_\varphi(x^i)+V_\varphi(a+1,n+1,x
 $$
 
 Then:
-$$
-\mathbf{B} =
-\begin{array}{cc}
-u_1 \\
-u_2 \\
-\vdots \\
-u_N
-\end{array}
-$$
+
+<p align="center">
+  <img src="figs/matrix_B.png" width="80%" />
+</p>
 
 
 ## 📊 Interactive Visuals
