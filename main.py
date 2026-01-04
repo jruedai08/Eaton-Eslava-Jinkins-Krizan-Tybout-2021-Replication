@@ -91,6 +91,7 @@ def plot_value_function(params, policy,phi_idx,macro_idx,m_network,elev=30,azim=
     ax.view_init(elev=elev, azim=azim)
     fig.colorbar(surf, ax=ax, shrink=0.5, aspect=10, label='Value')
     plt.tight_layout()
+    plt.savefig('figs\\figure_value_function.png')
     plt.show()
 
 
@@ -113,7 +114,7 @@ def plot_search_policy(params, policy,phi_idx,macro_idx,m_network):
     plt.xlabel("Number of Successes (a)")
     plt.gca().invert_yaxis()
     plt.tight_layout()
-    plt.savefig('figure_search_policy.png')
+    plt.savefig('figs\\figure_search_policy.png')
     plt.show()
 
 def plot_posterior_beliefs(params, policy):
@@ -133,5 +134,5 @@ def plot_posterior_beliefs(params, policy):
     plt.xlabel("Number of Successes (a)")
     plt.gca().invert_yaxis()
     plt.tight_layout()
-    plt.savefig('figure_beliefs.png')
+    plt.savefig('figs\\figure_beliefs.png')
     plt.show()

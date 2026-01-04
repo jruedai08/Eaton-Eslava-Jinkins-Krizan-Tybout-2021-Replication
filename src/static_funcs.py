@@ -57,7 +57,7 @@ def get_optimal_search_intensity(expected_theta, net_size, payoff_success, val_s
     '''
     mb = expected_theta * (payoff_success + val_success) + (1 - expected_theta) * val_fail - val_current
     # Visibility effect
-    network_factor = (1 + np.log(1+net_size))**gamma
+    network_factor = (1 + np.log(net_size))**gamma
     
     # FOC
     term_inside = np.maximum((network_factor * mb / kappa0) + 1, 0) # max for safety

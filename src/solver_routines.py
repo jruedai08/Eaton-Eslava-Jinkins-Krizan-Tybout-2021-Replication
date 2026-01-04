@@ -45,7 +45,7 @@ def solve_expected_match_profit(params, pie_scale, L_b, X_grid, Q_macro, Q_macro
     # Bellman Iterative Solver for Expected Profit
     for j in range(n_phi): # given Phi fixed
         current_payoff = payoff_tensor[:, j, :]
-        print(f" > with Phi equals to {params.Phi[j]:.4f}",current_payoff)
+        #print(f" > with Phi equals to {params.Phi[j]:.4f}",current_payoff)
         
         # Initial Guess
         ## c_val = 0 implies what if expected profit is 0 in the state
@@ -145,8 +145,8 @@ def solve_policy_home(policy, params):
                         V_succ_ref = V_h[k, m+1, i_phi, :]
                         is_boundary = False
                     
-                    V_curr, s_curr = _solve_hjb_layer_home(
-                        params, pi_h_vec, theta_val, net_size_val, V_succ_ref, is_boundary
+                    V_curr, s_curr = _solve_hjb_layer_no_learning(
+                        params, pi_h_vec, theta_val, net_size_val, V_succ_ref, is_boundary, params.cs_h
                     )
                     
                     # restore the data
@@ -159,7 +159,7 @@ def solve_policy_home(policy, params):
 
 
 
-def _solve_hjb_layer_home(params, payoff_flow, theta, net_size, V_next, is_boundary):
+def _solve_hjb_layer_no_learning(params, payoff_flow, theta, net_size, V_next, is_boundary,cost_scale):
     """
     HJB solver with implicit method
     """
@@ -182,10 +182,10 @@ def _solve_hjb_layer_home(params, payoff_flow, theta, net_size, V_next, is_bound
             val_success=val_success,
             val_fail=val_fail,
             val_current=V_guess,
-            kappa0=params.cs_h, kappa1=params.kappa1, gamma=params.gam
+            kappa0=cost_scale, kappa1=params.kappa1, gamma=params.gam
         )
         
-        cost = get_search_cost(s_star, net_size, params.cs_h, params.kappa1, params.gam)
+        cost = get_search_cost(s_star, net_size, cost_scale, params.kappa1, params.gam)
         
         # Construct Linear System
         data, rows, cols = [], [], []
@@ -275,9 +275,9 @@ def solve_policy_foreign(policy, params):
                 theta_fixed = policy.post_probs[n_max, a]
 
                 V_bdy_guess = np.zeros(2*x_size+1)
-                V_curr, s_curr = _solve_hjb_layer_home(
+                V_curr, s_curr = _solve_hjb_layer_no_learning(
                     params, pi_f_vec, theta_fixed, float(net_max + 1), 
-                    V_next=V_bdy_guess, is_boundary=True 
+                    V_next=V_bdy_guess, is_boundary=True, cost_scale=params.cs_f
                     )
                 V_f[n_max, a, net_max, i_phi, :] = V_curr # restore
                 L_f[n_max, a, net_max, i_phi, :] = s_curr
@@ -285,9 +285,9 @@ def solve_policy_foreign(policy, params):
                 V_next_net = V_curr
                 
                 for m in range(net_max-1,-1,-1): # backward algorithm for visibility
-                    V_curr, s_curr = _solve_hjb_layer_home(
+                    V_curr, s_curr = _solve_hjb_layer_no_learning(
                         params, pi_f_vec, theta_fixed, float(m + 1), 
-                        V_next=V_next_net, is_boundary=False
+                        V_next=V_next_net, is_boundary=False, cost_scale=params.cs_f
                         )
                     V_f[n_max, a, m, i_phi, :] = V_curr
                     L_f[n_max, a, m, i_phi, :] = s_curr

@@ -1,3 +1,7 @@
+'''
+Code still in development ...
+'''
+
 import numpy as np
 
 def simulate_macro_trajectories(params, policy):
