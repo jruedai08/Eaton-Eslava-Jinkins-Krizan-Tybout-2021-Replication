@@ -85,54 +85,45 @@ $$
 \frac{\partial c(s^*,a)}{\partial s}=\overline{\theta}_{a,n}[\tilde{\pi}_\varphi(x)+V_\varphi(a+1,n+1,x)]+(1-\overline{\theta}_{a,n})V_\varphi(a,n+1,x)-V_\varphi(a,n,x)
 $$
 
-* Given optimal searching intensity $s^*$, I rewrite the equation into $AX=b$, where:
+* Given optimal searching intensity $s^*$, I rewrite the HJB equation into a linear system $\mathbf{A}\mathbf{V}=\mathbf{B}$, where $N$ is the number of grid points.
 
-* $A$ is a $N\times N$ shape matrix, with $N$ is the number of the grid.
+* **Matrix $\mathbf{A}$ ($N \times N$)**: The sparse transition matrix.
 $$
-A = 
+\mathbf{A} = 
 \begin{bmatrix}
-\rho+s^*+\lambda_x^X                     & -\lambda_x^X                             & 0                                        & ... & 0\\
--\frac{1}{2}(1-\frac{N-1}{N})\lambda_x^X & \rho+s^*+\lambda_x^X                     & -\frac{1}{2}(1+\frac{N-1}{N})\lambda_x^X & ... & 0 \\
-0                                        & -\frac{1}{2}(1-\frac{N-2}{N})\lambda_x^X & \rho+s^*+\lambda_x^X                     & ... & 0 \\
-...                                      & ...                                      & ...                                      &     & ... \\
-0                                        & 0                                        & 0                                        & ... & \rho+s^*+\lambda_x^X
+\rho+s^*+\lambda_x^X & -\lambda_x^X & 0 & \cdots & 0 \\
+-\frac{1}{2}(1-\frac{N-1}{N})\lambda_x^X & \rho+s^*+\lambda_x^X & -\frac{1}{2}(1+\frac{N-1}{N})\lambda_x^X & \cdots & 0 \\
+0 & -\frac{1}{2}(1-\frac{N-2}{N})\lambda_x^X & \rho+s^*+\lambda_x^X & \cdots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \cdots & \rho+s^*+\lambda_x^X
 \end{bmatrix}
 $$
 
-* $X$ is a $N$ shape vector.
+* **Vector $\mathbf{V}$ ($N \times 1$)**: The value function we solve for.
 $$
-X = 
+\mathbf{V} = 
 \begin{bmatrix}
-V_\varphi(a,n,x^1)\\
-V_\varphi(a,n,x^2)\\
-...\\
+V_\varphi(a,n,x^1) \\
+V_\varphi(a,n,x^2) \\
+\vdots \\
 V_\varphi(a,n,x^N)
 \end{bmatrix}
 $$
 
-* $b$ is a $N$ shape vector.
+* **Vector $\mathbf{B}$ ($N \times 1$)**: The flow payoff and option value vector.
+Let the RHS term for state $x^i$ be:
+$$u_i = s^* \{\overline{\theta}_{a,n}[\tilde{\pi}_\varphi(x^i)+V_\varphi(a+1,n+1,x^i)]+(1-\overline{\theta}_{a,n})V_\varphi(a,n+1,x^i)\} - c(s^*,a)$$
+
+Then:
 $$
-B =
+\mathbf{B} =
 \begin{bmatrix}
-s\{\overline{\theta}_{a,n}[\tilde{\pi}_\varphi(x^1)+V_\varphi(a+1,n+1,x^1)]+(1-\overline{\theta}_{a,n})V_\varphi(a,n+1,x^1)\}-c(s,a) \\
-s\{\overline{\theta}_{a,n}[\tilde{\pi}_\varphi(x^2)+V_\varphi(a+1,n+1,x^2)]+(1-\overline{\theta}_{a,n})V_\varphi(a,n+1,x^2)\}-c(s,a) \\
-... \\
-s\{\overline{\theta}_{a,n}[\tilde{\pi}_\varphi(x^N)+V_\varphi(a+1,n+1,x^N)]+(1-\overline{\theta}_{a,n})V_\varphi(a,n+1,x^N)\}-c(s,a)
+u_1 \\
+u_2 \\
+\vdots \\
+u_N
 \end{bmatrix}
 $$
-
-## 📊 Visuals
-
-### 1. 3D Value Function Landscape
-The following 3D plot illustrates the convexity of the firm's value function with respect to accumulated successes ($a$) and trials ($n$), highlighting the **option value of learning**.
-
-![Value Function Landscape](assets/value_function_3d.png)
-
-### 2. Optimal Search Intensity
-Heatmap showing the optimal search policy $\lambda(n, a)$.
-![Search Policy](assets/search_policy.png)
-
-
 
 
 ## 📊 Interactive Visuals
