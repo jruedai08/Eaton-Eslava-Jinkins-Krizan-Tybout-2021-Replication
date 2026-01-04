@@ -59,10 +59,9 @@ $$
 * Given the state $\{a,n,x,\varphi\}$, the return to search includes (1) switch to other macro statement. (2) encounters a buyer and results in a transaction. (3) encounters a buyer but fails to result in a transaction.
 
 $$
-V_{\varphi}(a, n, x) = \max_{s} \frac{1}{\rho + s + \lambda_x^X} \left[ 
+V_{\varphi}(a, n, x) = \max_{s} \frac{1}{\rho + s + \lambda_x^X} [ 
 -c(s, a) + \sum_{x' \neq x} q_{xx'}^X V_{\varphi}(a, n, x') 
-+ s \left\{ \bar{\theta}_{a,n} [\tilde{\pi}_{\varphi}(x) + V_{\varphi}(a+1, n+1, x)] + (1 - \bar{\theta}_{a,n})V_{\varphi}(a, n+1, x) \right\} 
-\right]
++ s \{ \bar{\theta}_{a,n} [\tilde{\pi}_{\varphi}(x) + V_{\varphi}(a+1, n+1, x)] + (1 - \bar{\theta}_{a,n})V_{\varphi}(a, n+1, x) \} ]
 $$
 
 Where:
@@ -90,39 +89,42 @@ $$
 * **Matrix $\mathbf{A}$ ($N \times N$)**: The sparse transition matrix.
 $$
 \mathbf{A} = 
-\begin{bmatrix}
+\begin{array}{cc}
 \rho+s^*+\lambda_x^X & -\lambda_x^X & 0 & \cdots & 0 \\
 -\frac{1}{2}(1-\frac{N-1}{N})\lambda_x^X & \rho+s^*+\lambda_x^X & -\frac{1}{2}(1+\frac{N-1}{N})\lambda_x^X & \cdots & 0 \\
 0 & -\frac{1}{2}(1-\frac{N-2}{N})\lambda_x^X & \rho+s^*+\lambda_x^X & \cdots & 0 \\
 \vdots & \vdots & \vdots & \ddots & \vdots \\
 0 & 0 & 0 & \cdots & \rho+s^*+\lambda_x^X
-\end{bmatrix}
+\end{array}
 $$
 
 * **Vector $\mathbf{V}$ ($N \times 1$)**: The value function we solve for.
 $$
 \mathbf{V} = 
-\begin{bmatrix}
+\begin{array}{cc}
 V_\varphi(a,n,x^1) \\
 V_\varphi(a,n,x^2) \\
 \vdots \\
 V_\varphi(a,n,x^N)
-\end{bmatrix}
+\end{array}
 $$
 
 * **Vector $\mathbf{B}$ ($N \times 1$)**: The flow payoff and option value vector.
 Let the RHS term for state $x^i$ be:
-$$u_i = s^* \{\overline{\theta}_{a,n}[\tilde{\pi}_\varphi(x^i)+V_\varphi(a+1,n+1,x^i)]+(1-\overline{\theta}_{a,n})V_\varphi(a,n+1,x^i)\} - c(s^*,a)$$
+
+$$
+u_i = s^* \{\overline{\theta}_{a,n}[\tilde{\pi}_\varphi(x^i)+V_\varphi(a+1,n+1,x^i)]+(1-\overline{\theta}_{a,n})V_\varphi(a,n+1,x^i)\} - c(s^*,a)
+$$
 
 Then:
 $$
 \mathbf{B} =
-\begin{bmatrix}
+\begin{array}{cc}
 u_1 \\
 u_2 \\
 \vdots \\
 u_N
-\end{bmatrix}
+\end{array}
 $$
 
 
