@@ -1,4 +1,4 @@
-# Replication of Eaton, Kortum, and Kramarz (2021)
+# Replication of Eaton et al (2021)
 
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jruedai08/Eaton-Eslava-Jinkins-Krizan-Tybout-2021-Replication/blob/main/console.ipynb)
